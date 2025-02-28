@@ -1,0 +1,16 @@
+# pipelines/echo_pipeline.yaml
+name: Echo Pipeline
+description: A simple pipeline that echoes user input after processing.
+steps:
+  - name: Preprocess
+    type: preprocess
+    config:
+      lowercase: true
+  - name: CustomAgent
+    type: agent
+    config:
+      message_prefix: "Agent says: "
+  - name: Postprocess
+    type: postprocess
+    config:
+      capitalize: true

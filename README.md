@@ -1,1 +1,1 @@
-# g4-webui-pipelines
+# G4 API - Open WebUI Pipelines
