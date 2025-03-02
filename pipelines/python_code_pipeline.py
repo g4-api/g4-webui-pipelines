@@ -11,7 +11,7 @@ class Pipeline:
         # The identifier must be unique across all pipelines.
         # The identifier must be an alphanumeric string that can include underscores or hyphens. It cannot contain spaces, special characters, slashes, or backslashes.
         # self.id = "python_code_pipeline"
-        self.name = "Python Code Pipeline"
+        self.name = "Custom Agents Router"
         pass
 
     async def on_startup(self):
