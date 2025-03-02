@@ -38,11 +38,17 @@ class Pipeline:
         print(messages)
         print(body)
 
-        url = "http://192.168.1.13:5000/ping"
+        url = "http://host.docker.internal:5000/agent/007"
+        json_data = {
+            "user_message": user_message,
+            "model_id": model_id,
+            "messages": messages,
+            "body": body
+        }
 
         try:
-            response = requests.get(url)
-            response.raise_for_status()  # Raise an exception for 4xx/5xx status codes
+            response = requests.post(url, json=json_data)
+            response.raise_for_status()
 
             # Parse JSON response into a Python dict
             data = response.json()
