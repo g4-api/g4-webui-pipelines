@@ -14,8 +14,9 @@ class Pipeline:
         # Using env-vars keeps code generic and avoids hard-coding secrets.
         self.agent_url: str = os.getenv(
             "AGENT_URL",
-            "http://host.docker.internal:9955/api/v4/g4/mcp/completions"
-        )
+            "http://host.docker.internal:9955/api/v4/g4/mcp/completions")
+
+        self.stream: bool = os.getenv("PIPELINE_CHAT_MODE", "BULK").upper() == 'STREAM'
 
     # ── Lifecycle hooks ──────────────────────────────────────────────────────────
     async def on_startup(self) -> None:
@@ -43,6 +44,8 @@ class Pipeline:
             • Generator   → streaming chunks
             • Iterator    → streaming chunks
         """
+
+        body.stream = False
 
         # ── Invoke external agent ───────────────────────────────────────────────
         try:
