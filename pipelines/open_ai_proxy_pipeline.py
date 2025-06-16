@@ -1,6 +1,5 @@
 import json
 import os
-import uuid
 import requests
 from typing import List, Union, Generator, Iterator
 
@@ -61,9 +60,10 @@ class Pipeline:
             response.raise_for_status()
             data = response.json()
 
-            # Inject chat_id and session_id if not already present
-            data["chat_id"] = data.get("chat_id") or body.get("chat_id") or str(uuid.uuid4())
-            data["session_id"] = data.get("session_id") or body.get("session_id") or str(uuid.uuid4())
+            for choice in data.get("choices", []):
+                message = choice.get("message", {})
+                if "annotations" in message:
+                    message.pop("annotations")
 
             print('------------------- RESPONSE -------------------')
             print(json.dumps(data, indent=4))
