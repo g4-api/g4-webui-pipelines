@@ -6,6 +6,6 @@ response = pipline.pipe(
     user_message="User message",
     model_id="gpt-4",
     messages=[{"role": "user", "content": "hi!"}],
-    body={"stream": False})
+    body={"stream": True})
 
 print(response)
