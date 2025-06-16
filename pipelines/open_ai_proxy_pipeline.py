@@ -45,13 +45,23 @@ class Pipeline:
 
         # ── Invoke external agent ───────────────────────────────────────────────
         try:
-            response = requests.post(self.agent_url, json=body)
+            json_data = {
+                "user_message": user_message,
+                "model": model_id,
+                "messages": messages,
+                "body": body,
+            }
+
+            response = requests.post(self.agent_url, json=json_data)
 
             # Raise for HTTP errors (4xx / 5xx)
             response.raise_for_status()
 
             # Parse JSON response; we expect a dict with "message" inside.
             data = response.json()
+
+            # TODO: Remove on production
+            print(data)
 
             # Forward agent's reply to the UI.
             return data
