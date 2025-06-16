@@ -46,6 +46,8 @@ class Pipeline:
         # ── Invoke external agent ───────────────────────────────────────────────
         try:
             json_data = {
+                "chat_id": body.get('chat_id'),
+                "session_id": body.get('session_id'),
                 "user_message": user_message,
                 "model": model_id,
                 "messages": messages,
@@ -61,7 +63,17 @@ class Pipeline:
             data = response.json()
 
             # TODO: Remove on production
+            print('------------------- BODY -----------------------\n\n')
+            print(body)
+            print('------------------- BODY END -------------------\n\n')
+
+            print('------------------- REQUEST --------------------\n\n')
+            print(json_data)
+            print('------------------- REQUEST END ----------------\n\n')
+
+            print('------------------- RESPONSE -------------------\n\n')
             print(data)
+            print('------------------- RESPONSE END ---------------\n\n')
 
             # Forward agent's reply to the UI.
             return data
