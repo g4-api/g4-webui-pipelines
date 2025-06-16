@@ -45,7 +45,7 @@ class Pipeline:
             • Iterator    → streaming chunks
         """
 
-        body.stream = False
+        body['stream'] = False
 
         # ── Invoke external agent ───────────────────────────────────────────────
         try:
