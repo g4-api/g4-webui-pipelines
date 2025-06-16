@@ -60,6 +60,8 @@ class Pipeline:
             response.raise_for_status()
             data = response.json()
 
+            data['stream']=False
+
             for choice in data.get("choices", []):
                 message = choice.get("message", {})
                 if "annotations" in message:
