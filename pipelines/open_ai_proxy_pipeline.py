@@ -1,3 +1,4 @@
+import json
 from typing import List, Union, Generator, Iterator
 import os
 import requests
@@ -63,16 +64,16 @@ class Pipeline:
             data = response.json()
 
             # TODO: Remove on production
-            print('------------------- BODY -----------------------\n\n')
-            print(body)
+            print('------------------- BODY -----------------------')
+            print(json.dumps(body, indent=4))
             print('------------------- BODY END -------------------\n\n')
 
-            print('------------------- REQUEST --------------------\n\n')
-            print(json_data)
+            print('------------------- REQUEST --------------------')
+            print(json.dumps(json_data, indent=4))
             print('------------------- REQUEST END ----------------\n\n')
 
-            print('------------------- RESPONSE -------------------\n\n')
-            print(data)
+            print('------------------- RESPONSE -------------------')
+            print(json.dumps(data, indent=4))
             print('------------------- RESPONSE END ---------------\n\n')
 
             # Forward agent's reply to the UI.
