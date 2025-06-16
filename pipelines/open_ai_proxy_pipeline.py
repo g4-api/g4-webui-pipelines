@@ -47,6 +47,11 @@ class Pipeline:
 
         body['stream'] = False
 
+        # TODO: Remove on production
+        print('------------------- BODY -----------------------')
+        print(json.dumps(body, indent=4))
+        print('------------------- BODY END -------------------\n\n')
+
         # ── Invoke external agent ───────────────────────────────────────────────
         try:
             json_data = {
@@ -58,6 +63,11 @@ class Pipeline:
                 "body": body,
             }
 
+            # TODO: Remove on production
+            print('------------------- REQUEST --------------------')
+            print(json.dumps(json_data, indent=4))
+            print('------------------- REQUEST END ----------------\n\n')
+
             response = requests.post(self.agent_url, json=json_data)
 
             # Raise for HTTP errors (4xx / 5xx)
@@ -67,14 +77,6 @@ class Pipeline:
             data = response.json()
 
             # TODO: Remove on production
-            print('------------------- BODY -----------------------')
-            print(json.dumps(body, indent=4))
-            print('------------------- BODY END -------------------\n\n')
-
-            print('------------------- REQUEST --------------------')
-            print(json.dumps(json_data, indent=4))
-            print('------------------- REQUEST END ----------------\n\n')
-
             print('------------------- RESPONSE -------------------')
             print(json.dumps(data, indent=4))
             print('------------------- RESPONSE END ---------------\n\n')
